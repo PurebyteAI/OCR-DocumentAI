@@ -285,6 +285,9 @@ def main():
     print("\nTesting PDF text extraction...")
     test_pdf_text_extraction()
     
+    print("\nTesting OCR text extraction...")
+    test_ocr_text_extraction()
+    
     print("\nTesting file size limits...")
     test_file_size_limit()
     
