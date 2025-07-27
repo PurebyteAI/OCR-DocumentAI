@@ -85,7 +85,7 @@ def create_sample_pdf_with_mortgage_content():
     pdf.cell(0, 8, '2. Restrictive covenants of record', 0, 1)
     
     # Return PDF as bytes
-    return pdf.output(dest='S').encode('latin-1')
+    return pdf.output()
 
 def create_large_file():
     """Create a file larger than 10MB for testing size limits"""
