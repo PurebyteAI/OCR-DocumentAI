@@ -153,11 +153,18 @@ def test_pdf_text_extraction():
 def test_file_size_limit():
     """Test file size limit (10MB max)"""
     try:
-        large_content = create_large_file()
+        # Use a pre-created large file
+        large_file_path = "/app/large_test_file.bin"
+        if os.path.exists(large_file_path):
+            with open(large_file_path, 'rb') as f:
+                large_content = f.read()
+        else:
+            large_content = create_large_file()
+        
         print(f"Created test file of size: {len(large_content) / (1024*1024):.1f} MB")
         
         if len(large_content) > 10 * 1024 * 1024:  # Ensure it's actually > 10MB
-            files = {'file': ('large_file.png', large_content, 'image/png')}
+            files = {'file': ('large_file.bin', large_content, 'application/octet-stream')}
             
             response = requests.post(f"{API_BASE}/analyze-document", files=files, timeout=30)
             
