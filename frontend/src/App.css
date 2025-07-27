@@ -1,38 +1,97 @@
-.App {
-    text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
-.App-link {
-    color: #61dafb;
+/* Smooth animations */
+* {
+  transition: all 0.2s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Focus styles */
+button:focus,
+input:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Custom hover effects */
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Text ellipsis for long content */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Custom gradient backgrounds */
+.gradient-blue {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+}
+
+/* Card shadows */
+.card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive text */
+@media (max-width: 640px) {
+  .text-responsive {
+    font-size: 0.875rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
