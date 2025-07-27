@@ -233,3 +233,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Initial implementation complete. All backend endpoints implemented with OCR and OpenAI integration. Frontend has clean upload interface. Need to test document processing pipeline end-to-end."
+  - agent: "testing"
+    message: "BACKEND TESTING COMPLETE: ✅ File upload, OCR, PDF extraction, health endpoint all working. ❌ CRITICAL ISSUE: OpenAI API quota exceeded - blocks document analysis, field extraction, and compliance notes. Need new API key or billing resolution."
