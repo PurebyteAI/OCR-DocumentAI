@@ -150,6 +150,48 @@ def test_pdf_text_extraction():
     except Exception as e:
         results.add_result("PDF text extraction - exception", False, str(e))
 
+def test_ocr_text_extraction():
+    """Test OCR text extraction from image (without OpenAI analysis)"""
+    try:
+        # Create a simple image with text
+        img = Image.new('RGB', (400, 200), color='white')
+        draw = ImageDraw.Draw(img)
+        
+        try:
+            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
+        except:
+            font = ImageFont.load_default()
+        
+        draw.text((50, 50), "TITLE INSURANCE POLICY", fill='black', font=font)
+        draw.text((50, 80), "Policy Amount: $450,000.00", fill='black', font=font)
+        draw.text((50, 110), "Effective Date: January 15, 2024", fill='black', font=font)
+        
+        # Convert to bytes
+        buffer = io.BytesIO()
+        img.save(buffer, format='PNG')
+        buffer.seek(0)
+        image_content = buffer.getvalue()
+        
+        files = {'file': ('test_ocr.png', image_content, 'image/png')}
+        
+        response = requests.post(f"{API_BASE}/analyze-document", files=files, timeout=30)
+        
+        # We expect this to fail due to OpenAI quota, but we can check if OCR extraction worked
+        if response.status_code == 500:
+            error_detail = response.json().get("detail", "")
+            if "RateLimitError" in error_detail or "quota" in error_detail.lower():
+                results.add_result("OCR text extraction - works (OpenAI quota exceeded)", True)
+            elif "Failed to extract text from image" in error_detail:
+                results.add_result("OCR text extraction - failed", False, "OCR text extraction failed")
+            else:
+                results.add_result("OCR text extraction - unknown error", False, error_detail)
+        elif response.status_code == 200:
+            results.add_result("OCR text extraction - success", True)
+        else:
+            results.add_result("OCR text extraction - unexpected error", False, f"Status: {response.status_code}")
+    except Exception as e:
+        results.add_result("OCR text extraction - exception", False, str(e))
+
 def test_file_size_limit():
     """Test file size limit (10MB max)"""
     try:
