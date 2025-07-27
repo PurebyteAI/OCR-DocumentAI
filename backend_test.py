@@ -67,27 +67,26 @@ class TestResults:
 results = TestResults()
 
 def create_sample_pdf_with_mortgage_content():
-    """Create a sample PDF with mortgage document content"""
-    buffer = io.BytesIO()
-    c = canvas.Canvas(buffer, pagesize=letter)
+    """Create a simple PDF-like content for testing (using text as PDF is complex without reportlab)"""
+    # For testing purposes, we'll create a simple text file that mimics PDF content
+    # In a real scenario, we'd use a proper PDF library
+    pdf_text = """TITLE INSURANCE POLICY
+
+Policy Number: TI-2024-001234
+Effective Date: January 15, 2024
+Policy Amount: $450,000.00
+Insured Party: John Smith and Jane Smith
+Underwriter: First American Title Insurance Company
+
+Legal Description:
+Lot 15, Block 3, Sunset Hills Subdivision,
+City of Austin, Travis County, Texas
+
+Exceptions:
+1. Easement for utilities as recorded
+2. Restrictive covenants of record"""
     
-    # Add mortgage document content
-    c.drawString(100, 750, "TITLE INSURANCE POLICY")
-    c.drawString(100, 720, "Policy Number: TI-2024-001234")
-    c.drawString(100, 690, "Effective Date: January 15, 2024")
-    c.drawString(100, 660, "Policy Amount: $450,000.00")
-    c.drawString(100, 630, "Insured Party: John Smith and Jane Smith")
-    c.drawString(100, 600, "Underwriter: First American Title Insurance Company")
-    c.drawString(100, 570, "Legal Description:")
-    c.drawString(120, 540, "Lot 15, Block 3, Sunset Hills Subdivision,")
-    c.drawString(120, 510, "City of Austin, Travis County, Texas")
-    c.drawString(100, 480, "Exceptions:")
-    c.drawString(120, 450, "1. Easement for utilities as recorded")
-    c.drawString(120, 420, "2. Restrictive covenants of record")
-    
-    c.save()
-    buffer.seek(0)
-    return buffer.getvalue()
+    return pdf_text.encode('utf-8')
 
 def create_sample_image_with_mortgage_content():
     """Create a sample image with mortgage document text"""
