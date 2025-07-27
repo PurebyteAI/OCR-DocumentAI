@@ -12,8 +12,6 @@ from pathlib import Path
 import tempfile
 from PIL import Image, ImageDraw, ImageFont
 import io
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
 import time
 
 # Get backend URL from frontend .env file
