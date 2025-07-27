@@ -66,26 +66,34 @@ class TestResults:
 results = TestResults()
 
 def create_sample_pdf_with_mortgage_content():
-    """Create a simple PDF-like content for testing (using text as PDF is complex without reportlab)"""
-    # For testing purposes, we'll create a simple text file that mimics PDF content
-    # In a real scenario, we'd use a proper PDF library
-    pdf_text = """TITLE INSURANCE POLICY
-
-Policy Number: TI-2024-001234
-Effective Date: January 15, 2024
-Policy Amount: $450,000.00
-Insured Party: John Smith and Jane Smith
-Underwriter: First American Title Insurance Company
-
-Legal Description:
-Lot 15, Block 3, Sunset Hills Subdivision,
-City of Austin, Travis County, Texas
-
-Exceptions:
-1. Easement for utilities as recorded
-2. Restrictive covenants of record"""
+    """Create a proper PDF with mortgage document content"""
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('Arial', 'B', 16)
     
-    return pdf_text.encode('utf-8')
+    # Add mortgage document content
+    pdf.cell(0, 10, 'TITLE INSURANCE POLICY', 0, 1, 'C')
+    pdf.ln(10)
+    
+    pdf.set_font('Arial', '', 12)
+    pdf.cell(0, 8, 'Policy Number: TI-2024-001234', 0, 1)
+    pdf.cell(0, 8, 'Effective Date: January 15, 2024', 0, 1)
+    pdf.cell(0, 8, 'Policy Amount: $450,000.00', 0, 1)
+    pdf.cell(0, 8, 'Insured Party: John Smith and Jane Smith', 0, 1)
+    pdf.cell(0, 8, 'Underwriter: First American Title Insurance Company', 0, 1)
+    pdf.ln(5)
+    
+    pdf.cell(0, 8, 'Legal Description:', 0, 1)
+    pdf.cell(0, 8, 'Lot 15, Block 3, Sunset Hills Subdivision,', 0, 1)
+    pdf.cell(0, 8, 'City of Austin, Travis County, Texas', 0, 1)
+    pdf.ln(5)
+    
+    pdf.cell(0, 8, 'Exceptions:', 0, 1)
+    pdf.cell(0, 8, '1. Easement for utilities as recorded', 0, 1)
+    pdf.cell(0, 8, '2. Restrictive covenants of record', 0, 1)
+    
+    # Return PDF as bytes
+    return pdf.output(dest='S').encode('latin-1')
 
 def create_sample_image_with_mortgage_content():
     """Create a sample image with mortgage document text"""
