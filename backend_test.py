@@ -141,7 +141,7 @@ def create_large_file():
     """Create a file larger than 10MB for testing size limits"""
     buffer = io.BytesIO()
     # Create a large image (should be > 10MB)
-    large_img = Image.new('RGB', (4000, 4000), color='white')
+    large_img = Image.new('RGB', (5000, 5000), color='white')
     large_img.save(buffer, format='PNG')
     buffer.seek(0)
     return buffer.getvalue()
