@@ -224,12 +224,10 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "File upload endpoint (PDF/image, 10MB max)"
-    - "OCR text extraction (Tesseract integration)"
+  current_focus: []
+  stuck_tasks:
     - "OpenAI GPT-4o-mini integration for structured data extraction"
-  stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
