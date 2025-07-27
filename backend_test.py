@@ -13,6 +13,7 @@ import tempfile
 from PIL import Image, ImageDraw, ImageFont
 import io
 import time
+from fpdf import FPDF
 
 # Get backend URL from frontend .env file
 def get_backend_url():
